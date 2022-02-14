@@ -1,3 +1,0 @@
-# Learn Gulp
-
-Learn Gulp
