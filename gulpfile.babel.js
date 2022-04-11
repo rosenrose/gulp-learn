@@ -5,12 +5,13 @@ import ws from "gulp-webserver";
 import image from "gulp-image";
 import gulp_sass from "gulp-sass";
 import node_sass from "node-sass";
-const sass = gulp_sass(node_sass);
 import autoprefixer from "gulp-autoprefixer";
 import minifyCSS from "gulp-csso";
 import browserify from "gulp-bro";
 import babelify from "babelify";
 import ghPages from "gulp-gh-pages";
+
+const sass = gulp_sass(node_sass);
 
 const routes = {
   pug: {
@@ -55,8 +56,11 @@ const js = () =>
     .src(routes.js.src)
     .pipe(
       browserify({
-        // transform: [babelify.configure({ presets: ["@babel/preset-env"] }), ["uglifyify", { global: true }]],
-        transform: [babelify.configure({ presets: ["@babel/preset-env"] })],
+        transform: [
+          babelify.configure({ presets: ["@babel/preset-env"] }),
+          ["uglifyify", { global: true }],
+        ],
+        // transform: [babelify.configure({ presets: ["@babel/preset-env"] })],
       })
     )
     .pipe(gulp.dest(routes.js.dest));
@@ -71,9 +75,7 @@ const watch = () => {
 };
 
 const prepare = gulp.series([clean, img]);
-
 const assets = gulp.series([pug, styles, js]);
-
 const live = gulp.parallel([webserver, watch]);
 
 //export한 것들은 package.json의 script에서 사용됨.
