@@ -5,13 +5,15 @@ import ws from "gulp-webserver";
 import image from "gulp-image";
 import gulp_sass from "gulp-sass";
 import node_sass from "node-sass";
+import dart_sass from "sass";
 import autoprefixer from "gulp-autoprefixer";
 import minifyCSS from "gulp-csso";
 import browserify from "gulp-bro";
 import babelify from "babelify";
 import ghPages from "gulp-gh-pages";
 
-const sass = gulp_sass(node_sass);
+// const sass = gulp_sass(node_sass);
+const sass = gulp_sass(dart_sass);
 
 const routes = {
   pug: {
